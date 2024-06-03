@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <img src="https://i.ibb.co/ZH7dtw0/Skill-Swap-removebg-preview.png" alt="Skill-Swap-removebg-preview" width="100">
                     </a>
                 </div>
 
@@ -14,6 +14,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="/skills" :active="request()->is('skills*')">
+                        {{ __('Skills') }}
                     </x-nav-link>
                 </div>
             </div>
