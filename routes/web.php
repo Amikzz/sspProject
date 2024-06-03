@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
 //HOME PAGE
 Route::get('/', HomeController::class)->name('home');
 
+Route::resource('skills', SkillController::class)
+    ->middleware(['auth', 'verified']);
 
 //AUTHENTICATION ROUTES
 Route::middleware([
