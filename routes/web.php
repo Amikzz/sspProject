@@ -11,7 +11,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified', 'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -23,4 +23,3 @@ Route::middleware([
 Route::view('/policy', 'policy')->name('policy');
 Route::view('/terms', 'terms')->name('terms');
 Route::view('/stillnotconvinced', 'stillnotconvinced')->name('stillnotconvinced');
-Route::view('/payment', 'payment')->name('payment');

@@ -34,6 +34,7 @@
                                     <a
                                         href="{{ url('/dashboard') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
+                                        style="z-index: 10"
                                     >
                                         Dashboard
                                     </a>
@@ -183,7 +184,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="pricing-table-cta mb-8">
-                                                    <a class="button button-primary button-shadow button-block" href="{{route('payment')}}">Order now</a>
+                                                    <a class="button button-primary button-shadow button-block" href="{{route('register')}}">Register Now</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -30,7 +30,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             //$user->updateProfilePhoto($input['photo']);
 
             //NEW CODE
-            $user->addMedia($input['photo'])->toMediaCollection('profile_photo');
+            $user->clearMediaCollection('profile_photo');
+            $user->addMedia($input['photo'])
+                ->toMediaCollection('profile_photo');
         }
 
         if ($input['email'] !== $user->email &&

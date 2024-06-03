@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasApiTokens;
     use HasFactory;
@@ -79,5 +79,33 @@ class User extends Authenticatable implements HasMedia
     {
         $this->addMediaCollection('profile_photo')
             ->singleFile();
+    }
+
+    /**
+     * Get the profile photo URL.
+     *
+     * @return string
+     */
+    public function getProfilePhotoUrlAttribute(): string
+    {
+        $media = $this->getFirstMediaUrl('profile_photo');
+        return $media ?: asset('src/images/Windows_10_Default_Profile_Picture.svg.png');
+    }
+
+    /**
+     * Boot the model.
+     */
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::created(function (User $user) {
+            if (! $user->hasMedia('profile_photo')) {
+                $defaultPhotoPath = public_path('src/images/Windows_10_Default_Profile_Picture.svg.png');
+                $user->addMedia($defaultPhotoPath)
+                    ->preservingOriginal()
+                    ->toMediaCollection('profile_photo');
+            }
+        });
     }
 }
