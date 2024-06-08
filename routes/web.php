@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 //HOME PAGE
 Route::get('/', HomeController::class)->name('home');
 
+//SKILLS ROUTE
 Route::resource('skills', SkillController::class)
     ->middleware(['auth', 'verified']);
 
@@ -20,7 +21,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
 
 //ONE TIME VIEW ROUTES
 Route::view('/policy', 'policy')->name('policy');
