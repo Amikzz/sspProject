@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -64,11 +65,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(),
-                [
-                    'email' => 'required|email',
-                    'password' => 'required|string',
-                ]);
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|string',
+            ]);
 
             if ($validator->fails()) {
                 return response()->json([
@@ -78,6 +79,7 @@ class AuthController extends Controller
                 ], 422);
             }
 
+            // Attempt to log in the user
             if (!Auth::attempt($request->only('email', 'password'))) {
                 return response()->json([
                     'status' => false,
@@ -85,7 +87,10 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            // Get the authenticated user
             $user = User::where('email', $request->email)->firstOrFail();
+
+            // Create a new token for the user
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([

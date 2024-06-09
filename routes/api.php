@@ -22,7 +22,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+//crud operations for skills
+Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/skills', [SkillAPIController::class, 'index']);
     Route::post('/skills/create', [SkillAPIController::class, 'store']);
     Route::get('/skills/show/{skill}', [SkillAPIController::class, 'show']);
