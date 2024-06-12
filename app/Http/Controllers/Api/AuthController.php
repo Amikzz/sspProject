@@ -20,12 +20,12 @@ class AuthController extends Controller
         try {
             $validator = Validator::make($request->all(),
                 [
-                    'name' => 'required|string',
-                    'email' => 'required|email|unique:users,email',
-                    'password' => 'required|string|min:6',
-                    'phone' => 'required|string',
-                    'address' => 'required|string',
-                    'gender' => 'required|string',
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'string', 'min:6'],
+                    'phone' => ['required', 'string', 'min:10'],
+                    'address' => ['required', 'string', 'max:255'],
+                    'gender' => ['nullable', 'string', 'max:6'],
                 ]);
 
             if ($validator->fails()) {
@@ -47,9 +47,13 @@ class AuthController extends Controller
 
             if ($user->save()) {
                 $token = $user->createToken('auth_token')->plainTextToken;
+
+                //email verification
+                $user->sendEmailVerificationNotification();
+
                 return response()->json([
                     'status' => true,
-                    'message' => 'User created successfully',
+                    'message' => 'User created successfully. Verify your email.',
                     'token' => $token
                 ], 201);
             }
@@ -120,6 +124,45 @@ class AuthController extends Controller
             'message' => 'User profile data before editing',
             'data' => $userdata,
         ], 200);
+    }
+
+    //profile edit
+    public function editProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => ['required', 'string', 'min:10'],
+                'address' => ['required', 'string', 'max:255'],
+                'gender' => ['nullable', 'string', 'max:6'],
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user1 = $request->user();
+
+        $user = $request->user()->forceFill([
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                    'gender' => $request->gender
+                ])->save();
+
+        $user2 = $request->user();
+
+        if($user){
+            return response()->json([
+                'status' => true,
+                'message' => "User profile updated successfully. Previous data $user1",
+                'data' => $user2,
+            ]);
+        }
     }
 
     //logout

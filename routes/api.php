@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SkillAPIController;
+use App\Http\Controllers\Api\VerifyEmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -20,10 +21,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/email/verification-notification', [VerifyEmailController::class, 'sendVerificationEmail']);
+    Route::post('/profile/edit-profile', [AuthController::class, 'editProfile']);
 });
 
 //crud operations for skills
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/skills', [SkillAPIController::class, 'index']);
     Route::post('/skills/create', [SkillAPIController::class, 'store']);
     Route::get('/skills/show/{skill}', [SkillAPIController::class, 'show']);
