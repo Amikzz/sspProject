@@ -115,7 +115,7 @@ class AuthController extends Controller
         }
     }
 
-    //profile
+    //profile data
     public function profile(Request $request)
     {
         $userdata = \auth()->user();
@@ -159,7 +159,7 @@ class AuthController extends Controller
         if($user){
             return response()->json([
                 'status' => true,
-                'message' => "User profile updated successfully. Previous data $user1",
+                'message' => "User profile updated successfully. Previous data = $user1",
                 'data' => $user2,
             ]);
         }
