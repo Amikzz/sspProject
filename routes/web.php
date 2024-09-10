@@ -19,7 +19,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // routes/web.php
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 //ONE TIME VIEW ROUTES
