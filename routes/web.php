@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SkillController;
@@ -10,6 +11,10 @@ Route::get('/', HomeController::class)->name('home');
 
 //SKILLS ROUTE
 Route::resource('skills', SkillController::class)
+    ->middleware(['auth', 'verified']);
+
+//CATEGORIES ROUTE
+Route::resource('categories', CategoryController::class)
     ->middleware(['auth', 'verified']);
 
 //AUTHENTICATION ROUTES
