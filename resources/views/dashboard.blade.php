@@ -10,8 +10,8 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <!-- Welcome Section -->
                 <div class="p-8 text-center">
-                    <h1 class="text-4xl font-bold mb-4">Welcome, Admin</h1>
-                    <p class="text-gray-700 mb-6">We are glad to have you back. You are here because you verified your email. Thank you for that. Click on get started to start your journey as the Admin.</p>
+                    <h1 class="text-4xl font-bold mb-4">Welcome {{ $username }} !</h1>
+                    <br>
                     <a href="/skills" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get Started</a>
                 </div>
 

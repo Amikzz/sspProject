@@ -12,6 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         // Fetch the required data
+        $username = User::first()->name; // Get the name of the first user
         $totalSkills = Skill::count(); // Assuming you have a Skill model
         $totalUsers = User::count(); // Assuming you have a User model
         $totalEarnings = Skill::sum('priceperhour'); // Calculate the total of priceperhour in the skills table
@@ -22,7 +23,7 @@ class DashboardController extends Controller
         ];
 
         // Pass the data to the view
-        return view('dashboard', compact('totalSkills', 'totalUsers', 'totalEarnings', 'recentActivities'));
+        return view('dashboard', compact( 'username', 'totalSkills', 'totalUsers', 'totalEarnings', 'recentActivities'));
     }
 }
 
