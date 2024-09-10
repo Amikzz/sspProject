@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Skill;
 use App\Http\Requests\StoreSkillRequest;
 use App\Http\Requests\UpdateSkillRequest;
-use GuzzleHttp\Promise\Create;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Exception;
 
 class SkillController extends Controller
 {
@@ -14,9 +19,17 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return view('skills.index', [
-            'skills' => Skill::paginate(10),
-        ]);
+        try {
+            $categories = Category::all();
+            $skills = Skill::paginate(10);
+
+            return view('skills.index', compact('skills', 'categories'));
+        } catch (Exception $e) {
+            Log::error('Error fetching skills or categories: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error fetching skills or categories.');
+        }
     }
 
     /**
@@ -24,15 +37,27 @@ class SkillController extends Controller
      */
     public function store(StoreSkillRequest $request)
     {
-        $validated = $request->validated();
+        try {
+            $validated = $request->validated();
 
-        //slug creation
-        $validated['slug'] = \Str::slug($validated['name']);
+            //slug creation
+            $validated['slug'] = \Str::slug($validated['name']);
 
-        Skill::create($validated);
+            Skill::create($validated);
 
-        return redirect()->route('skills.index')
-            ->with('flash.banner', 'Skill created successfully.');
+            return redirect()->route('skills.index')
+                ->with('flash.banner', 'Skill created successfully.');
+        } catch (QueryException $e) {
+            Log::error('Database error while creating skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error creating skill. Please try again.');
+        } catch (Exception $e) {
+            Log::error('Unexpected error while creating skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Unexpected error. Please try again.');
+        }
     }
 
     /**
@@ -40,14 +65,34 @@ class SkillController extends Controller
      */
     public function update(UpdateSkillRequest $request, Skill $skill)
     {
-        $validated = $request->validated();
+        try {
+            $validated = $request->validated();
 
-        //slug update
-        $validated['slug'] = \Str::slug($validated['name']);
-        $skill->update($validated);
+            //slug creation
+            if ($skill->name !== $validated['name']) {
+                $validated['slug'] = \Str::slug($validated['name']);
+            }
 
-        return redirect()->route('skills.index')
-            ->with('flash.banner', 'Skill updated successfully.');
+            $skill->update($validated);
+
+            return redirect()->route('skills.index')
+                ->with('flash.banner', 'Skill updated successfully.');
+        } catch (ModelNotFoundException $e) {
+            Log::error('Skill not found: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Skill not found.');
+        } catch (QueryException $e) {
+            Log::error('Database error while updating skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error updating skill. Please try again.');
+        } catch (Exception $e) {
+            Log::error('Unexpected error while updating skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Unexpected error. Please try again.');
+        }
     }
 
     /**
@@ -55,11 +100,28 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        $model = $skill;
-        $skill->delete();
+        try {
+            $model = $skill;
+            $skill->delete();
 
-        session()->flash('flash.bannerStyle', 'danger');
-        return redirect()->route('skills.index')
-            ->with('flash.banner', 'Skill ' .$model->name. ' deleted successfully.');
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Skill ' . $model->name . ' deleted successfully.');
+        } catch (ModelNotFoundException $e) {
+            Log::error('Skill not found: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Skill not found.');
+        } catch (QueryException $e) {
+            Log::error('Database error while deleting skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error deleting skill. Please try again.');
+        } catch (Exception $e) {
+            Log::error('Unexpected error while deleting skill: ' . $e->getMessage());
+            return redirect()->route('skills.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Unexpected error. Please try again.');
+        }
     }
 }

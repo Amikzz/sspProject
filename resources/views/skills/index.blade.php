@@ -43,6 +43,14 @@
                                                     <input type="number" name="priceperhour" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                                                 </div>
                                                 <div class="p-3">
+                                                    <label for="category_id" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                                                    <select name="category_id" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="p-3">
                                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Skill</button>
                                                     <button type="button" @click="openAdd = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Cancel</button>
                                                 </div>
@@ -86,6 +94,14 @@
                                                     <input type="number" name="priceperhour" x-model="editSkill.priceperhour" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                                                 </div>
                                                 <div class="p-3">
+                                                    <label for="category_id" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                                                    <select name="category_id" x-model="editSkill.category_id" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}" :selected="editSkill.category_id == '{{ $category->id }}'">{{ $category->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="p-3">
                                                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Skill</button>
                                                     <button type="button" @click="openEdit = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Cancel</button>
                                                 </div>
@@ -114,6 +130,7 @@
                                             <p class="text-sm text-gray-700"><strong>ID:</strong> <span x-text="showSkill.id"></span></p>
                                             <p class="text-sm text-gray-700 mt-2"><strong>Description:</strong> <span x-text="showSkill.description"></span></p>
                                             <p class="text-sm text-gray-700 mt-2"><strong>Price per hour:</strong> Rs. <span x-text="showSkill.priceperhour"></span></p>
+                                            <p class="text-sm text-gray-700 mt-2"><strong>Category:</strong> <span x-text="showSkill.category_id"></span></p>
                                             <p class="text-sm text-gray-700 mt-2"><strong>Created at:</strong> <span x-text="showSkill.created_at"></span></p>
                                             <p class="text-sm text-gray-700 mt-2"><strong>Updated at:</strong> <span x-text="showSkill.updated_at"></span></p>
                                         </div>

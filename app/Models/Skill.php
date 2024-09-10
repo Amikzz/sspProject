@@ -14,5 +14,6 @@ class Skill extends Model
         'description',
         'slug',
         'priceperhour',
+        'category_id',
     ];
 }
