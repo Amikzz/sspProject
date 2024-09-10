@@ -15,63 +15,64 @@
     </div>
 </nav>
 
-<header class="bg-cover bg-center h-64" style="background-image: url('https://source.unsplash.com/random/1920x1080?skills');">
+<header class="bg-cover bg-center h-64" style="background-image: url('https://source.unsplash.com/random/1920x1080?collaboration');">
     <div class="flex items-center justify-center h-full w-full bg-gray-900 bg-opacity-50">
         <div class="text-center">
             <h1 class="text-white text-4xl font-bold">Still Not Convinced?</h1>
-            <p class="text-gray-300 mt-4">Discover the Benefits of SkillSwap</p>
+            <p class="text-gray-300 mt-4">Explore the Unique Benefits of SkillSwap for Sri Lankans</p>
         </div>
     </div>
 </header>
 
 <main class="container mx-auto p-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Feature: Share Your Skills -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Create a Detailed Profile</h2>
-            <p class="text-gray-700 mb-4">Start by including a comprehensive description of your skills and expertise on your profile. Highlight your availability and preferred methods of communication to make it easier for potential skill swap partners to connect with you. Uploading a professional profile picture can significantly build trust and credibility, helping you stand out in the community.</p>
-            <img src="https://source.unsplash.com/random/400x300?profile" alt="Profile" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Share Your Skills</h2>
+            <p class="text-gray-700 mb-4">SkillSwap allows you to share your unique skills and expertise with others. Whether you are an expert in cooking, coding, yoga, or graphic design, you can easily offer your skills to those who need them. Build your profile, set your rates, and start connecting with others in the community.</p>
         </div>
 
+        <!-- Feature: Hire a Skill -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Be Clear About Your Goals</h2>
-            <p class="text-gray-700 mb-4">When creating your profile and reaching out to others, be specific about the skills you are looking to learn or improve. Clearly outline what you can offer in return, whether it’s another skill, valuable advice, or mentorship. This clarity ensures that both parties have aligned expectations and can find mutually beneficial partnerships.</p>
-            <img src="https://source.unsplash.com/random/400x300?goals" alt="Goals" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Hire a Skill</h2>
+            <p class="text-gray-700 mb-4">Need a skill that you don't possess? Use SkillSwap to find the perfect match! Whether you are looking for a digital marketer, language tutor, or personal trainer, our platform provides a wide range of talented individuals ready to help you achieve your goals.</p>
         </div>
 
+        <!-- Feature: Get Paid for Your Expertise -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Utilize the Search Function</h2>
-            <p class="text-gray-700 mb-4">SkillSwap’s search function is a powerful tool to find the right individuals. Use specific keywords related to the skills you are seeking and take advantage of filters to narrow down results based on location, skill level, and availability. This targeted approach saves time and helps you connect with the most relevant people.</p>
-            <img src="https://source.unsplash.com/random/400x300?search" alt="Search" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Get Paid for Your Expertise</h2>
+            <p class="text-gray-700 mb-4">Monetize your skills by setting your own rates and getting paid for your expertise. SkillSwap allows you to offer paid sessions, workshops, or consultations, providing a platform where your knowledge and skills can turn into a source of income.</p>
         </div>
 
+        <!-- Feature: Build a Local Network -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Communicate Effectively</h2>
-            <p class="text-gray-700 mb-4">When you find potential skill swap partners, reach out with clear and concise messages explaining what you are looking for and what you can offer. Effective communication is key to building positive relationships, so always be respectful and professional in your interactions to foster a supportive and collaborative environment.</p>
-            <img src="https://source.unsplash.com/random/400x300?communicate" alt="Communicate" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Build a Local Network</h2>
+            <p class="text-gray-700 mb-4">SkillSwap connects you with like-minded Sri Lankans who are passionate about learning and sharing skills. Engage in a vibrant community, build meaningful relationships, and expand your professional and personal network right here in Sri Lanka.</p>
         </div>
 
+        <!-- Feature: Flexible Learning and Earning -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Set Up Structured Skill Swap Sessions</h2>
-            <p class="text-gray-700 mb-4">Once you’ve connected with a skill swap partner, agree on a schedule and format for your sessions. Structured sessions with clear goals and preparation maximize the learning experience for both parties. This organized approach ensures that each session is productive and focused.</p>
-            <img src="https://source.unsplash.com/random/400x300?schedule" alt="Schedule" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Flexible Learning and Earning</h2>
+            <p class="text-gray-700 mb-4">With SkillSwap, you can learn at your own pace and on your own terms. Our platform offers flexibility to schedule sessions that fit your busy life, ensuring that both learning and earning opportunities are accessible and convenient.</p>
         </div>
 
+        <!-- Feature: Verified Profiles and Secure Payments -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Give and Receive Feedback</h2>
-            <p class="text-gray-700 mb-4">Constructive feedback is essential for growth. Provide your skill swap partner with helpful feedback to aid their improvement, and be open to receiving feedback yourself. Use the feedback to refine your skills and enhance the effectiveness of your exchanges.</p>
-            <img src="https://source.unsplash.com/random/400x300?feedback" alt="Feedback" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Verified Profiles and Secure Payments</h2>
+            <p class="text-gray-700 mb-4">SkillSwap ensures a secure and trustworthy environment by verifying profiles and facilitating secure payments. You can focus on sharing and acquiring skills, knowing that your transactions are safe and your personal data is protected.</p>
         </div>
 
+        <!-- Feature: SkillSwap Community Engagement -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Engage in the Community</h2>
-            <p class="text-gray-700 mb-4">Participate actively in SkillSwap’s forums and discussion groups to connect with more people. Sharing your experiences and success stories can inspire others and help you build a network of like-minded individuals. Engaging in the community also opens up more opportunities for skill swapping.</p>
-            <img src="https://source.unsplash.com/random/400x300?community" alt="Community" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Engage with the Community</h2>
+            <p class="text-gray-700 mb-4">Participate in community events, forums, and discussion groups to share your experiences, seek advice, and make new friends. Being active in the SkillSwap community enhances your visibility and opens up more opportunities for skill exchanges.</p>
         </div>
 
+        <!-- Feature: Custom Skill Exchange Plans -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Maintain Professionalism</h2>
-            <p class="text-gray-700 mb-4">Always honor your commitments and respect your partner’s time. Professionalism is crucial in maintaining a positive reputation within the community. Ensure that all exchanges are fair and mutually beneficial, fostering a trustworthy environment where everyone can thrive.</p>
-            <img src="https://source.unsplash.com/random/400x300?professionalism" alt="Professionalism" class="rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">Custom Skill Exchange Plans</h2>
+            <p class="text-gray-700 mb-4">Create custom skill exchange plans tailored to your needs. Whether it’s a one-time consultation or a series of lessons, SkillSwap lets you design flexible arrangements that work for both you and your partner, ensuring a win-win outcome.</p>
         </div>
     </div>
 </main>
