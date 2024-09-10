@@ -20,14 +20,6 @@ class SkillController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('skills.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreSkillRequest $request)
@@ -41,26 +33,6 @@ class SkillController extends Controller
 
         return redirect()->route('skills.index')
             ->with('flash.banner', 'Skill created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Skill $skill)
-    {
-        return view('skills.view', [
-            'skill' => $skill,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Skill $skill)
-    {
-        return view('skills.edit', [
-            'skill' => $skill,
-        ]);
     }
 
     /**
