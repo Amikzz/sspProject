@@ -38,7 +38,14 @@ class SkillController extends Controller
     public function store(StoreSkillRequest $request)
     {
         try {
-            $validated = $request->validated();
+            $validated = $request->validate(
+                [
+                    'name' => 'required|string|max:255',
+                    'description' => 'required|string',
+                    'priceperhour' => 'required|numeric',
+                    'category_id' => 'required|exists:categories,id',
+                ]
+            );
 
             //slug creation
             $validated['slug'] = \Str::slug($validated['name']);
@@ -66,7 +73,14 @@ class SkillController extends Controller
     public function update(UpdateSkillRequest $request, Skill $skill)
     {
         try {
-            $validated = $request->validated();
+            $validated = $request->validate(
+                [
+                    'name' => 'required|string|max:255',
+                    'description' => 'required|string',
+                    'priceperhour' => 'required|numeric',
+                    'category_id' => 'required|exists:categories,id',
+                ]
+            );
 
             //slug creation
             if ($skill->name !== $validated['name']) {

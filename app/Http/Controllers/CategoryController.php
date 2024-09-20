@@ -63,8 +63,12 @@ class CategoryController extends Controller
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255',
             ]);
+
+            //slug creation
+            if ($category->name !== $validated['name']) {
+                $validated['slug'] = \Str::slug($validated['name']);
+            }
 
             $category->update($validated);
 
