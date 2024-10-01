@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SkillController;
@@ -23,9 +24,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    // routes/web.php
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+Route::get('/user-growth-data', [ChartController::class, 'getUserGrowthData'])->name('user-growth-data');
 
 //ONE TIME VIEW ROUTES
 Route::view('/policy', 'policy')->name('policy');

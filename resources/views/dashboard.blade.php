@@ -140,7 +140,59 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">User Growth Over Time</h3>
+                    <canvas id="userGrowthChart" width="400" height="200"></canvas>
+                </div>
+
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('userGrowthChart').getContext('2d');
+
+            fetch('/user-growth-data')
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.map(item => item.date); // X-axis (Dates)
+                    const userCounts = data.map(item => item.count); // Y-axis (Number of users)
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Users',
+                                data: userCounts,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderWidth: 2,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Date',
+                                    },
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Users',
+                                    },
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
 </x-app-layout>
