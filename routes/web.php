@@ -25,9 +25,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/user-growth-data', [ChartController::class, 'getUserGrowthData'])->name('user-growth-data');
+    Route::get('/skill-growth-data', [ChartController::class, 'getSkillGrowthData'])->name('skill-growth-data');
 });
 
-Route::get('/user-growth-data', [ChartController::class, 'getUserGrowthData'])->name('user-growth-data');
+
 
 //ONE TIME VIEW ROUTES
 Route::view('/policy', 'policy')->name('policy');

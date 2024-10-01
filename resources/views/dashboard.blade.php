@@ -118,34 +118,16 @@
                     </div>
                 </div>
 
-
-                <!-- Recent Activities -->
-                <div class="p-8">
-                    <h2 class="text-xl font-semibold mb-4">Recent Activities</h2>
-                    <div class="bg-white shadow-md rounded-lg p-4">
-                        <ul class="space-y-4">
-                            @foreach ($recentActivities as $activity)
-                                <li class="flex items-center">
-                                    <div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-blue-500 rounded-full">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16m-7 4h7"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-gray-800 font-medium">{{ $activity['message'] }}</p>
-                                        <p class="text-gray-600 text-sm">{{ $activity['timestamp'] }}</p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <div class="p-6 bg-white rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">User Growth Over Time</h3>
+                        <canvas style="max-width: 100%; height: auto;margin: 0 auto;padding: 20px;" id="userGrowthChart" width="500" height="300"></canvas>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Skill Growth Over Time</h3>
+                        <canvas style="max-width: 100%; height: auto;margin: 0 auto;padding: 20px;" id="skillGrowthChart" width="500" height="300"></canvas>
                     </div>
                 </div>
-
-                <div class="p-6 bg-white rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">User Growth Over Time</h3>
-                    <canvas id="userGrowthChart" width="400" height="200"></canvas>
-                </div>
-
             </div>
         </div>
     </div>
@@ -168,6 +150,49 @@
                             datasets: [{
                                 label: 'Number of Users',
                                 data: userCounts,
+                                borderColor: 'rgba(255, 0, 0, 1)', // Red border color
+                                backgroundColor: 'rgba(255, 0, 0, 0.2)', // Light red background fill
+                                borderWidth: 2,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Date',
+                                    },
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Users',
+                                    },
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+
+    document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('skillGrowthChart').getContext('2d');
+
+            fetch('/skill-growth-data')
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.map(item => item.date); // X-axis (Dates)
+                    const userCounts = data.map(item => item.count); // Y-axis (Number of users)
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Number of Skills',
+                                data: userCounts,
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderWidth: 2,
@@ -186,7 +211,7 @@
                                     beginAtZero: true,
                                     title: {
                                         display: true,
-                                        text: 'Number of Users',
+                                        text: 'Number of Skills',
                                     },
                                 }
                             }
