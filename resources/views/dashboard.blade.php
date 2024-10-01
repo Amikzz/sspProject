@@ -71,52 +71,54 @@
                     </div>
                 </div>
 
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Total Super Admin -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-red-500 text-white rounded-full">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-gray-800">Total Super Admins</h3>
-                                <p class="text-gray-600 mt-2">{{ $totalsadmin }}</p>
+                @if(auth()->user()->userType == 'sadmin')
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Total Super Admin -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-red-500 text-white rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Total Super Admins</h3>
+                                    <p class="text-gray-600 mt-2">{{ $totalsadmin }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Total Admins -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-orange-500 text-white rounded-full">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10v6M8 10v6m2-4h4"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-gray-800">Total Admins</h3>
-                                <p class="text-gray-600 mt-2">{{ $totaladmin }}</p>
+                        <!-- Total Admins -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-orange-500 text-white rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10v6M8 10v6m2-4h4"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Total Admins</h3>
+                                    <p class="text-gray-600 mt-2">{{ $totaladmin }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Total Customers -->
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18m-9 4h5m-5 0v4m-7-4H5"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-gray-800">Total Customers</h3>
-                                <p class="text-gray-600 mt-2">{{ $totalcustomer }}</p>
+                        <!-- Total Customers -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18m-9 4h5m-5 0v4m-7-4H5"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Total Customers</h3>
+                                    <p class="text-gray-600 mt-2">{{ $totalcustomer }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     <div class="p-6 bg-white rounded-lg shadow-md">
