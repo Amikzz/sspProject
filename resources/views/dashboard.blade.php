@@ -11,38 +11,46 @@
                 <!-- Welcome Section -->
                 <div class="p-8 text-center">
                     <h1 class="text-4xl font-bold mb-4">Welcome {{ $username }} !</h1>
+                    <p class="text-gray-600">
+                        @if($role == 'sadmin')
+                            You are logged in as a Super Admin.
+                        @endif
+                        @if($role == 'admin')
+                            You are logged in as an Admin.
+                        @endif
+                    </p>
                     <br>
                     <a href="/skills" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get Started</a>
                 </div>
 
                 <!-- Dashboard Metrics -->
-                <div class="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Total Skills -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full">
+                            <div class="w-12 h-12 flex items-center justify-center bg-indigo-500 text-white rounded-full">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10m-5 4h5M3 6h18M3 10h18M3 14h18m-6 4h6"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m-4-2h8"></path>
                                 </svg>
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-xl font-semibold text-gray-800">Total Skills</h3>
-                                <p class="text-gray-600 mt-2">{{ $totalSkills }}</p> <!-- Dynamic value -->
+                                <p class="text-gray-600 mt-2">{{ $totalSkills }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Total Users -->
+                    <!-- Total System Users -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-green-500 text-white rounded-full">
+                            <div class="w-12 h-12 flex items-center justify-center bg-pink-500 text-white rounded-full">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v5h5V3H5zM14 8v5h5V8h-5zM3 14v6h6v-6H3zM15 14v6h6v-6h-6z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8 8 0 1118.879 6.196a8 8 0 01-13.758 11.608z"></path>
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-gray-800">Total Users</h3>
-                                <p class="text-gray-600 mt-2">{{ $totalUsers }}</p> <!-- Dynamic value -->
+                                <h3 class="text-xl font-semibold text-gray-800">Total System Users</h3>
+                                <p class="text-gray-600 mt-2">{{ $totalUsers }}</p>
                             </div>
                         </div>
                     </div>
@@ -50,39 +58,66 @@
                     <!-- Total Earnings -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 flex items-center justify-center bg-yellow-500 text-white rounded-full">
+                            <div class="w-12 h-12 flex items-center justify-center bg-teal-500 text-white rounded-full">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.742 5.8a2 2 0 11-3.484 0 2 2 0 013.484 0zm-1.742 2.3a6 6 0 100 12 6 6 0 000-12zm0 9a3 3 0 110-6 3 3 0 010 6z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-3.314 0-6 2.686-6 6h6v-6z"></path>
                                 </svg>
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-xl font-semibold text-gray-800">Total Earnings</h3>
-                                <p class="text-gray-600 mt-2">Rs. {{ number_format($totalEarnings, 2) }}</p> <!-- Dynamic value -->
+                                <p class="text-gray-600 mt-2">Rs. {{ number_format($totalEarnings, 2) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Status Bars -->
-                <div class="p-8">
-                    <h2 class="text-xl font-semibold mb-4">System Status</h2>
-                    <div class="bg-gray-200 rounded-lg overflow-hidden">
-                        <div class="p-4">
-                            <h3 class="text-lg font-medium text-gray-800">System Health</h3>
-                            <div class="flex items-center mt-2">
-                                <div class="w-1/2 bg-green-500 text-white text-center py-1 px-2 rounded-full">Good</div>
-                                <div class="w-1/2 bg-gray-300 rounded-full ml-2" style="width: 75%"></div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Total Super Admin -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 flex items-center justify-center bg-red-500 text-white rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-800">Total Super Admins</h3>
+                                <p class="text-gray-600 mt-2">{{ $totalsadmin }}</p>
                             </div>
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-medium text-gray-800">Server Uptime</h3>
-                            <div class="flex items-center mt-2">
-                                <div class="w-1/2 bg-yellow-500 text-white text-center py-1 px-2 rounded-full">Moderate</div>
-                                <div class="w-1/2 bg-gray-300 rounded-full ml-2" style="width: 50%"></div>
+                    </div>
+
+                    <!-- Total Admins -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 flex items-center justify-center bg-orange-500 text-white rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10v6M8 10v6m2-4h4"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-800">Total Admins</h3>
+                                <p class="text-gray-600 mt-2">{{ $totaladmin }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Customers -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18m-9 4h5m-5 0v4m-7-4H5"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-semibold text-gray-800">Total Customers</h3>
+                                <p class="text-gray-600 mt-2">{{ $totalcustomer }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Recent Activities -->
                 <div class="p-8">
