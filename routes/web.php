@@ -5,6 +5,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 //HOME PAGE
@@ -16,6 +17,9 @@ Route::resource('skills', SkillController::class)
 
 //CATEGORIES ROUTE
 Route::resource('categories', CategoryController::class)
+    ->middleware(['auth', 'verified']);
+
+Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified']);
 
 //AUTHENTICATION ROUTES

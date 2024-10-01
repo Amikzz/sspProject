@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSkillRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,11 @@ class StoreSkillRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'priceperhour' => 'nullable|integer',
+            'email' => 'required|email',
+            'password' => 'nullable|string|min:8',
+            'address' => 'nullable|string|max:255',
+            'gender' => 'nullable',
+            'phone' => 'nullable|string|max:255',
         ];
     }
 }
