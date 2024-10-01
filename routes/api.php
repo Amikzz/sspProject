@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryAPIController;
 use App\Http\Controllers\Api\SkillAPIController;
 use App\Http\Controllers\Api\VerifyEmailController;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -26,10 +28,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 //crud operations for skills
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified', EnsureAdmin::class]], function () {
     Route::get('/skills', [SkillAPIController::class, 'index']);
     Route::post('/skills/create', [SkillAPIController::class, 'store']);
     Route::get('/skills/show/{skill}', [SkillAPIController::class, 'show']);
     Route::put('/skills/edit/{skill}', [SkillAPIController::class, 'update']);
     Route::delete('/skills/delete/{skill}', [SkillAPIController::class, 'destroy']);
+});
+
+//crud operations for categories
+Route::group(['middleware' => ['auth:sanctum', 'verified', EnsureAdmin::class]], function () {
+    Route::get('/category', [CategoryAPIController::class, 'index']);
+    Route::post('/category/create', [CategoryAPIController::class, 'store']);
+    Route::get('/category/show/{category}', [CategoryAPIController::class, 'show']);
+    Route::put('/category/edit/{category}', [CategoryAPIController::class, 'update']);
+    Route::delete('/category/delete/{category}', [CategoryAPIController::class, 'destroy']);
 });
