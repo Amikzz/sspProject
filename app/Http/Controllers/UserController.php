@@ -50,6 +50,7 @@ class UserController extends Controller
                 'address' => 'nullable|string|max:255',
                 'gender' => 'nullable',
                 'phone' => 'nullable|string|max:255',
+                'userType' => 'nullable',
             ]);
 
             User::create($validated);

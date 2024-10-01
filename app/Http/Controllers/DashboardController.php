@@ -8,30 +8,46 @@ use App\Models\User; // Import User Model
 use App\Models\Skill;
 use Illuminate\Support\Facades\Auth;
 
-// Import Skill Model
-
 class DashboardController extends Controller
 {
     public function index()
     {
-        //if user is a=not an admin show an error message invalid login
-        if (auth()->user()->userType == 'sadmin') {
+        // Fetch the currently authenticated user
+        $loggedInUser = auth()->user();
+
+        // Check if the logged-in user is 'sadmin'
+        if ($loggedInUser->userType == 'sadmin') {
             // Fetch the required data
-            $username = User::first()->name; // Get the name of the first user
-            $role = User::first()->userType; // Get the role of the first user
+            $username = $loggedInUser->name; // Get the name of the logged-in user
+            $role = $loggedInUser->userType; // Get the role of the logged-in user
             $totalSkills = Skill::count(); // Assuming you have a Skill model
             $totalUsers = User::count(); // Assuming you have a User model
-            $totalsadmin = User::where('userType', 'sadmin')->count(); // Assuming you have a User model
-            $totaladmin = User::where('userType', 'admin')->count(); // Assuming you have a User model
-            $totalcustomer = User::where('userType', 'user')->count(); // Assuming you have a User model
-            $totalEarnings = Skill::sum('priceperhour'); // Calculate the total of priceperhour in the skills table
+            $totalsadmin = User::where('userType', 'sadmin')->count(); // Count the total number of super admins
+            $totaladmin = User::where('userType', 'admin')->count(); // Count the total number of admins
+            $totalcustomer = User::where('userType', 'user')->count(); // Count the total number of users
+            $totalEarnings = Skill::sum('priceperhour'); // Calculate the total price per hour in the skills table
 
             // Pass the data to the view
-            return view('dashboard', compact( 'username', 'totalSkills', 'totalUsers', 'totaladmin', 'totalsadmin', 'totalcustomer', 'totalEarnings', 'role'));
-        } else{
+            return view('dashboard', compact('username', 'totalSkills', 'totalUsers', 'totaladmin', 'totalsadmin', 'totalcustomer', 'totalEarnings', 'role'));
+
+        } elseif ($loggedInUser->userType == 'admin') {
+            // Fetch the required data for admin
+            $username = $loggedInUser->name; // Get the name of the logged-in user
+            $role = $loggedInUser->userType; // Get the role of the logged-in user
+            $totalSkills = Skill::count(); // Assuming you have a Skill model
+            $totalUsers = User::count(); // Assuming you have a User model
+            $totalsadmin = User::where('userType', 'sadmin')->count(); // Count the total number of super admins
+            $totaladmin = User::where('userType', 'admin')->count(); // Count the total number of admins
+            $totalcustomer = User::where('userType', 'user')->count(); // Count the total number of users
+            $totalEarnings = Skill::sum('priceperhour'); // Calculate the total price per hour in the skills table
+
+            // Pass the data to the view
+            return view('dashboard', compact('username', 'totalSkills', 'totalUsers', 'totaladmin', 'totalsadmin', 'totalcustomer', 'totalEarnings', 'role'));
+
+        } else {
+            // Logout and redirect if the user type is neither 'sadmin' nor 'admin'
             Auth::guard('web')->logout();
             return redirect()->route('home')->with('error', 'Invalid login');
         }
     }
 }
-
