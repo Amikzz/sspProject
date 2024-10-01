@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <!-- Button to open Add Category modal -->
                 <div class="p-5">
-                    <button @click="openAdd = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Category</button>
+                    <button @click="openAdd = true" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Add Category</button>
                 </div>
 
                 <!-- Add Category Modal -->
@@ -35,7 +35,7 @@
                                                     <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                                                 </div>
                                                 <div class="p-3">
-                                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Category</button>
+                                                    <button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Add Category</button>
                                                     <button type="button" @click="openAdd = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Cancel</button>
                                                 </div>
                                             </form>

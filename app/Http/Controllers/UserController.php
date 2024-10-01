@@ -41,7 +41,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //add a new user
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email',
+                'password' => 'required|string|min:8',
+                'address' => 'nullable|string|max:255',
+                'gender' => 'nullable',
+                'phone' => 'nullable|string|max:255',
+            ]);
+
+            User::create($validated);
+            return redirect()->route('users.index')
+                ->with('flash.banner', 'User created successfully.');
+
+        } catch (Exception $e) {
+            Log::error('Error validating user data: ' . $e->getMessage());
+            return redirect()->route('users.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error validating user data.');
+        }
     }
 
     /**
@@ -94,6 +114,27 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            User::destroy($id);
+
+            return redirect()->route('users.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'User deleted successfully.');
+        } catch (ModelNotFoundException $e) {
+            Log::error('User not found: ' . $e->getMessage());
+            return redirect()->route('users.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'User not found.');
+        } catch (QueryException $e) {
+            Log::error('Database error while deleting user: ' . $e->getMessage());
+            return redirect()->route('users.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Error deleting user. Please try again.');
+        } catch (Exception $e) {
+            Log::error('Unexpected error while deleting user: ' . $e->getMessage());
+            return redirect()->route('users.index')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'Unexpected error. Please try again.');
+        }
     }
 }

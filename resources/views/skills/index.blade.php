@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <!-- Button to open Add Skill modal -->
                 <div class="p-5">
-                    <button @click="openAdd = true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Skill</button>
+                    <button @click="openAdd = true" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add Skill</button>
                 </div>
 
                 <!-- Add Skill Modal -->
@@ -51,7 +51,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="p-3">
-                                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Skill</button>
+                                                    <button type="submit" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add Skill</button>
                                                     <button type="button" @click="openAdd = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Cancel</button>
                                                 </div>
                                             </form>

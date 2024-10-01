@@ -33,8 +33,6 @@ Route::middleware([
     Route::get('/skill-growth-data', [ChartController::class, 'getSkillGrowthData'])->name('skill-growth-data');
 });
 
-
-
 //ONE TIME VIEW ROUTES
 Route::view('/policy', 'policy')->name('policy');
 Route::view('/terms', 'terms')->name('terms');

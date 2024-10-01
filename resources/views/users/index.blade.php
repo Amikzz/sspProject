@@ -8,6 +8,84 @@
     <div class="py-12" x-data="{ openAdd: false, openEdit: false, openShow: false, editUser: null, showUser: null }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
+                <!-- Add User Button -->
+                <div class="p-5">
+                    <button @click="openAdd = true" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Add User</button>
+                </div>
+
+                <!-- Add User Modal -->
+                <div x-show="openAdd" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                    <div class="flex items-end justify-end min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <!-- Overlay -->
+                        <div x-show="openAdd" @click="openAdd = false" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                        <!-- Modal Content -->
+                        <div x-show="openAdd" @click.away="openAdd = false" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div class="sm:flex sm:items-start">
+                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                            Add New User
+                                        </h3>
+                                        <div class="mt-2">
+                                            <form method="POST" action="{{ route('users.store') }}">
+                                                @csrf
+                                                <!-- Name -->
+                                                <div class="p-3">
+                                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                                    <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500" required>
+                                                </div>
+                                                <!-- Email -->
+                                                <div class="p-3">
+                                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                                    <input type="email" name="email" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500" required>
+                                                </div>
+                                                <!-- Password -->
+                                                <div class="p-3">
+                                                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                                    <input type="password" name="password" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500" required>
+                                                </div>
+                                                <!-- Phone -->
+                                                <div class="p-3">
+                                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                                    <input type="number" name="phone" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                                                </div>
+                                                <!-- Address -->
+                                                <div class="p-3">
+                                                    <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                                    <input type="text" name="address" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                                                </div>
+                                                <!-- Gender -->
+                                                <div class="p-3">
+                                                    <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                                                    <select name="gender" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                                <!-- User Type -->
+                                                <div class="p-3">
+                                                    <label for="userType" class="block text-sm font-medium text-gray-700 mb-2">User Type</label>
+                                                    <select name="userType" class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500">
+                                                        <option value="admin">Admin</option>
+                                                        <option value="user">User</option>
+                                                    </select>
+                                                </div>
+                                                <div class="p-3">
+                                                    <button type="submit" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Add User</button>
+                                                    <button type="button" @click="openAdd = false" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Edit User Modal -->
                 <div x-show="openEdit" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
