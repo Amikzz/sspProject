@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="/skills" :active="request()->is('skills*')">
+                    <x-nav-link href="/skills" :active="request()->is('skills')">
                         {{ __('Skills') }}
                     </x-nav-link>
                 </div>
@@ -34,6 +34,12 @@
                         </x-nav-link>
                     </div>
                 @endif
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="/skillsharers" :active="request()->is('skillsharers*')">
+                        {{ __('Skill Sharers') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
