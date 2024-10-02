@@ -24,7 +24,7 @@ class DashboardController extends Controller
             $totalUsers = User::count(); // Assuming you have a User model
             $totalsadmin = User::where('userType', 'sadmin')->count(); // Count the total number of super admins
             $totaladmin = User::where('userType', 'admin')->count(); // Count the total number of admins
-            $totalcustomer = User::where('userType', 'user')->count(); // Count the total number of users
+            $totalcustomer = User::whereIn('userType', ['user', 'suser'])->count(); // Count the total number of users and susers
             $totalEarnings = Skill::sum('priceperhour'); // Calculate the total price per hour in the skills table
 
             // Pass the data to the view
