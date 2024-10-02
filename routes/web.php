@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SkillSharerController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,10 @@ Route::resource('skillsharers', SkillSharerController::class)
 
 //USERS ROUTE
 Route::resource('users', UserController::class)
+    ->middleware(['auth', 'verified']);
+
+//ORDERS ROUTE
+Route::resource('orders', OrdersController::class)
     ->middleware(['auth', 'verified']);
 
 //AUTHENTICATION ROUTES
