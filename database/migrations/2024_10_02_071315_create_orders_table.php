@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('no_of_hours');
             $table->double('total_amount');
             $table->string('description')->nullable();
-            $table->string('status')->default('Completed');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

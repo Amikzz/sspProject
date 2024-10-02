@@ -3,31 +3,47 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Skill;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class SkillAPIController extends Controller
+class OrderAPIController extends Controller
 {
-    //fetch all skills
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return response()->json([
             'status' => true,
-            'message' => 'All Skills',
-            'data' => Skill::all()
+            'message' => 'All Orders',
+            'data' => Orders::all()
         ], 200);
     }
 
-    //create a new skill
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         try {
             $validator = Validator::make($request->all(),
                 [
-                    'name' => 'required|string|max:255',
+                    'customerID' => 'required|integer',
+                    'supplierID' => 'required|integer',
+                    'skillID' => 'required|integer',
+                    'no_of_hours' => 'required|integer',
+                    'total_amount' => 'required|numeric',
                     'description' => 'nullable|string',
-                    'priceperhour' => 'nullable|integer',
+                    'status' => 'nullable|string',
                 ]);
 
             if ($validator->fails()) {
@@ -38,23 +54,26 @@ class SkillAPIController extends Controller
                 ], 422);
             }
 
-            $skill = new Skill([
-                'name' => $request->name,
+            $order = new Orders([
+                'customerID' => $request->customerID,
+                'supplierID' => $request->supplierID,
+                'skillID' => $request->skillID,
+                'no_of_hours' => $request->no_of_hours,
+                'total_amount' => $request->total_amount,
                 'description' => $request->description,
-                'priceperhour' => $request->priceperhour,
-                'slug' => \Str::slug($request['name'])
+                'status' => $request->status
             ]);
 
-            if ($skill->save()) {
+            if ($order->save()) {
                 return response()->json([
                     'status' => true,
-                    'message' => 'Skill created successfully',
-                    'data' => $skill
+                    'message' => 'Order added successfully',
+                    'data' => $order
                 ], 201);
             }else{
                 return response()->json([
                     'status' => false,
-                    'message' => 'Skill not created'
+                    'message' => 'Order not added'
                 ], 500);
             }
         } catch (\Exception $exception) {
@@ -65,22 +84,24 @@ class SkillAPIController extends Controller
         }
     }
 
-    //fetch a single skill
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
         try {
-            $skill = Skill::find($id);
+            $order = Orders::find($id);
 
-            if ($skill) {
+            if ($order) {
                 return response()->json([
                     'status' => true,
-                    'message' => 'Skill found',
-                    'data' => $skill
+                    'message' => 'Order found',
+                    'data' => $order
                 ], 200);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Skill not found'
+                    'message' => 'Order not found'
                 ], 404);
             }
         } catch (\Exception $exception) {
@@ -91,15 +112,23 @@ class SkillAPIController extends Controller
         }
     }
 
-    //update a skill
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         try {
             $validator = Validator::make($request->all(),
                 [
-                    'name' => 'required|string|max:255',
-                    'description' => 'nullable|string|max:255',
-                    'priceperhour' => 'nullable|integer',
+                    'status' => 'required|string',
                 ]);
 
             if ($validator->fails()) {
@@ -110,25 +139,27 @@ class SkillAPIController extends Controller
                 ], 422);
             }
 
-            $skill = Skill::find($id);
+            $order = Orders::find($id);
 
-            if ($skill) {
-                $skill->name = $request->name;
-                $skill->description = $request->description;
-                $skill->priceperhour = $request->priceperhour;
-                $skill->slug = \Str::slug($request['name']);
+            if ($order) {
+                $order->status = $request->status;
 
-                if ($skill->save()) {
+                if ($order->save()) {
                     return response()->json([
                         'status' => true,
-                        'message' => 'Skill updated successfully',
-                        'data' => $skill
+                        'message' => 'Order completed successfully',
+                        'data' => $order
                     ], 200);
+                }else{
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Order not completed'
+                    ], 500);
                 }
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Skill not found'
+                    'message' => 'Oder not found'
                 ], 404);
             }
         } catch (\Exception $exception) {
@@ -139,23 +170,25 @@ class SkillAPIController extends Controller
         }
     }
 
-    //delete a skill
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         try {
-            $skill = Skill::find($id);
+            $order = Orders::find($id);
 
-            if ($skill) {
-                $skill->delete();
+            if ($order) {
+                $order->delete();
 
                 return response()->json([
                     'status' => true,
-                    'message' => 'Skill deleted successfully'
+                    'message' => 'Order deleted successfully'
                 ], 200);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Skill not found'
+                    'message' => 'Order not found'
                 ], 404);
             }
         } catch (\Exception $exception) {
