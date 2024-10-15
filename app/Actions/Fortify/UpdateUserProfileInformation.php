@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
@@ -26,13 +28,20 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
-            //OLD CODE
-            //$user->updateProfilePhoto($input['photo']);
+            // Livewire temp file handling
+            $livewireTempFile = $input['photo'];
 
-            //NEW CODE
+            // Move the file from Livewire temp storage to a proper storage location
+            $filePath = $livewireTempFile->store('profile_photos', 'public');
+
+            // Now add the moved file to the Spatie media collection
             $user->clearMediaCollection('profile_photo');
-            $user->addMedia($input['photo'])
-                ->toMediaCollection('profile_photo');
+            try {
+                $user->addMediaFromDisk($filePath, 'public')
+                    ->toMediaCollection('profile_photo');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+                // Handle any file exceptions
+            }
         }
 
         if ($input['email'] !== $user->email &&
