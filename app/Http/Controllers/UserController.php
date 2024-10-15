@@ -16,6 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        if ($user->userType == 'admin') {
+            return redirect()->route('dashboard')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'You are not authorized to view this page.');
+        }
         try {
             $users = User::paginate(10);
 
@@ -41,6 +47,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        if ($user->userType == 'admin') {
+            return redirect()->route('dashboard')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'You are not authorized to view this page.');
+        }
         //add a new user
         try {
             $validated = $request->validate([
@@ -78,6 +90,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $user = auth()->user();
+        if ($user->userType == 'admin') {
+            return redirect()->route('dashboard')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'You are not authorized to view this page.');
+        }
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -115,6 +133,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = auth()->user();
+        if ($user->userType == 'admin') {
+            return redirect()->route('dashboard')
+                ->with('flash.bannerStyle', 'danger')
+                ->with('flash.banner', 'You are not authorized to view this page.');
+        }
         try {
             User::destroy($id);
 
